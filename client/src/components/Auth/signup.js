@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, SubmissionError } from "redux-form";
 import AuthField from "./authField";
 import axios from "axios";
+import {Redirect} from 'react-router-dom'
 
 class Signup extends Component {
+
+  state = {
+    redirectToDashboard: false
+  }
+
   renderField() {
     return (
       <div>
@@ -23,27 +29,48 @@ class Signup extends Component {
     );
   }
 
-  handleFormSubmit = data => {
-    console.log(data)
-    axios.post("/api/register", data);
+  submit = values => {
+    let self = this;
+    return new Promise((resolve, reject) => {
+      axios.post("/api/register", values).then(function(response) {
+        if (response.data.message) {
+          const errObj = new SubmissionError({ _error: response.data.message });
+          reject(errObj);
+        }else{
+        self.setState({redirectToDashboard: true})
+        }
+      });
+    });
+    
+
   };
 
   render() {
+    if(this.state.redirectToDashboard) {
+      return (
+        <Redirect to='/dashboard' />
+      )
+    }
+    const { error, handleSubmit, submitting } = this.props;
     return (
       <div className="row">
         <h2 className="center-align pink-text">SIGNUP</h2>
         <div className="col offset-s3 s6">
-          <form
-            onSubmit={this.props.handleSubmit(values =>
-              this.handleFormSubmit(values)
-            )}
-          >
+          <form onSubmit={handleSubmit(this.submit)}>
+            <div className="red-text" style={{padding: 20, fontSize: 18}}> 
+              {error && <strong>{error}</strong>}
+            </div>
             {this.renderField()}
-            <button type="submit" className="teal btn-flat white-text">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="teal btn-flat white-text"
+            >
               Submit
               <i className="material-icons right">done</i>
             </button>
           </form>
+          <p>Have an account? Please <a href='/login'>Login</a></p>
         </div>
       </div>
     );
@@ -64,11 +91,10 @@ function validate(values) {
   } else if (values.password.length < 8) {
     errors.password = "Password must be at least 8 characters";
   }
-
   return errors;
 }
 
 export default reduxForm({
   validate,
-  form: "authForm"
+  form: "authSignupForm"
 })(Signup);

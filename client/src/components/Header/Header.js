@@ -10,18 +10,21 @@ class Header extends Component {
       case false:
         return [
           <li key="1">
-            <a href="/auth">Signup</a>
+            <a href="/signup">Signup</a>
           </li>,
           <li key="2">
-            <a href="/auth">Login</a>
+            <a href="/login">Login</a>
           </li>
         ];
       default:
-        return (
-          <li>
+        return [
+          <li key="4">
+            <a href="/dashboard">Dashboard</a>
+          </li>,
+          <li key="3">
             <a href="/api/logout">Logout</a>
           </li>
-        );
+        ];
     }
   }
 

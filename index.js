@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const keys = require("./config/keys");
-const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const morgan = require("morgan");
@@ -57,7 +56,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
 require("./routes/authRoutes")(app, passport);
 

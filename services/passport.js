@@ -1,5 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
+
 module.exports = function(passport){
     passport.serializeUser(function(user, done) {
         done(null, user.id);
@@ -24,7 +25,7 @@ module.exports = function(passport){
                 console.log(err)
                 return done(err); }
             if (user) {
-                return done(null, false, {message: 'Oops! Email is already taken'});
+                return done(null, false, {message: 'Email already taken'});
             }else{
                 const user = new User();
                 user.email = email;
@@ -47,10 +48,10 @@ module.exports = function(passport){
             User.findOne({ email: email }, function(err, user) {
             if (err) { return done(err); }
             if (!user) {
-                return done(null, false, req.flash('loginMessage','Incorrect username.' ));
+                return done(null, false, {message: 'Incorrect email or password, please try again!'});
             }
             if (!user.validPassword(password)) {
-                return done(null, false,  req.flash('loginMessage','Incorrect password !' ));
+                return done(null, false, {message: 'Incorrect email or password, please try again!'});
             }
             return done(null, user);
             });
