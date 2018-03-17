@@ -14,7 +14,6 @@ module.exports = function(app, passport) {
       if (err) { return next(err) }
       if (!user) {
         // *** Display message without using flash option
-        console.log(info.message)
         return res.send({message: info.message})
       }
       req.logIn(user, function(err) {
@@ -33,7 +32,6 @@ module.exports = function(app, passport) {
       if (err) { return next(err) }
       if (!user) {
         // re-render the login form with a message
-        console.log(info.message)
         return res.send({message: info.message})
       }
       req.logIn(user, function(err) {

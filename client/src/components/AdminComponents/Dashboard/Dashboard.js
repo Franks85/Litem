@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import { reduxForm } from 'redux-form';
 import {Redirect} from 'react-router-dom'
-import * as actions from "../../actions";
+import * as actions from "../../../actions";
+import AdminForm from './AdminForm/AdminDataEntry';
 
 class Dashboard extends Component {
 
@@ -18,14 +20,19 @@ class Dashboard extends Component {
     
     return (
       <div>
-        <h1>Main page</h1>
+        <AdminForm />
       </div>
     )
   }
 }
 
-function mapStateToProps({ auth }) {
+const mapStateToProps = ({ auth }) => {
   return { auth };
 }
 
-export default connect(mapStateToProps, actions)(Dashboard);
+Dashboard = connect(mapStateToProps, actions)(Dashboard);
+
+
+export default reduxForm({
+  form: "dataEntry"
+})(Dashboard);

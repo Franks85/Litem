@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const path = require("path");
 // the order of require statement is important
 require("./models/User");
+require('./models/dataEntry')
 require("./services/passport")(passport);
 
 mongoose.Promise = global.Promise;
@@ -58,6 +59,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/authRoutes")(app, passport);
+require('./routes/dataEntryRoutes')(app);
 
 if (process.env.NODE_ENV === "production") {
   // express serve up production assets (like main.js file)

@@ -1,6 +1,6 @@
 import React from "react";
 
-const authField = ({ input, label, type, meta: { error, touched } }) => {
+export const inputField = ({ input, label, type, meta: { error, touched } }) => {
   
   return (
     <div>
@@ -11,4 +11,3 @@ const authField = ({ input, label, type, meta: { error, touched } }) => {
   );
 };
 
-export default authField;

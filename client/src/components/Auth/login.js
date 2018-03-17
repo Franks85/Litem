@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { reduxForm, Field, SubmissionError } from "redux-form";
-import AuthField from "./authField";
+import { inputField } from '../../utils/form/inputsField'
 import axios from "axios";
 import {Redirect} from 'react-router-dom'
 
@@ -17,13 +17,13 @@ class Login extends Component {
           type="email"
           name="email"
           label="Your Email"
-          component={AuthField}
+          component={inputField}
         />
         <Field
           type="password"
           name="password"
           label="Password"
-          component={AuthField}
+          component={inputField}
         />
       </div>
     );

@@ -3,11 +3,11 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./actions";
 
-import Header from "./components/Header/Header";
-import Landing from './components/Landing/Landing';
+import Header from "./components/publicComponents/Header/Header";
+import Landing from './components/publicComponents/Landing/Landing';
 import Login from './components/Auth/login'
 import Signup from './components/Auth/signup'
-import Dashboard from './components/Dashboard/Dashboard'
+import Dashboard from './components/AdminComponents/Dashboard/Dashboard'
 
 class App extends Component {
   
