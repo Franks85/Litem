@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { reduxForm, Field, SubmissionError } from "redux-form";
-import { inputField } from '../../utils/form/inputsField'
+import { inputField } from "../../utils/form/inputsField";
 import axios from "axios";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
-
   state = {
     redirectToDashboard: false
-  }
+  };
 
   renderField() {
     return (
@@ -30,47 +29,51 @@ class Login extends Component {
   }
 
   submit = values => {
-    console.log(values)
+    console.log(values);
     let self = this;
     return new Promise((resolve, reject) => {
       axios.post("/api/login", values).then(function(response) {
         if (response.data.message) {
           const errObj = new SubmissionError({ _error: response.data.message });
           reject(errObj);
-        }else{
-        self.setState({redirectToDashboard: true})
+        } else {
+          self.setState({ redirectToDashboard: true });
         }
       });
     });
-    
-
   };
 
   render() {
-    if(this.state.redirectToDashboard) {
-      return (
-        <Redirect to='/dashboard' />
-      )
+    if (this.state.redirectToDashboard) {
+      return <Redirect to="/dashboard" />;
     }
     const { error, handleSubmit, submitting } = this.props;
     return (
-      <div className="row">
-        <h2 className="center-align pink-text">LOGIN</h2>
-        <div className="col offset-s3 s6">
-          <form onSubmit={handleSubmit(this.submit)}>
-            <div className="red-text" style={{padding: 20, fontSize: 18}}> 
-              {error && <strong>{error}</strong>}
-            </div>
-            {this.renderField()}
-            <button
-              type="submit"
-              disabled={submitting}
-              className="teal btn-flat white-text"
-            >
-              Submit
-              <i className="material-icons right">done</i>
-            </button>
-          </form>
+      <div className="center-align">
+        <h2
+          className="pink-text"
+          style={{ display: "inline-flex", verticalAlign: "middle" }}
+        >
+          <i class="material-icons medium">account_circle</i>LOGIN
+        </h2>
+        <div className="row">
+          <div className="col offset-s3 s6">
+            <form onSubmit={handleSubmit(this.submit)}>
+              <div className="red-text" style={{ padding: 20, fontSize: 18 }}>
+                {error && <strong>{error}</strong>}
+              </div>
+              {this.renderField()}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="teal btn-flat white-text"
+                style={{ marginTop: 20 }}
+              >
+                Submit
+                <i className="material-icons right">done</i>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );
