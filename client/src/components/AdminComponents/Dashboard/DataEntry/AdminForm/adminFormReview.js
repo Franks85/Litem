@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "../../../../actions";
+import { withRouter } from 'react-router-dom';
+import * as actions from "../../../../../actions";
 import _ from "lodash";
 import formFields from "./formFields";
 
-const adminFormReview = ({ onCancel, formValues, adminDataSubmit }) => {
+const adminFormReview = ({ onCancel, formValues, adminDataSubmit, history }) => {
   const reviewFields = _.map(formFields, ({ label, name }) => {
     return (
       <div key={name}>
@@ -27,9 +28,9 @@ const adminFormReview = ({ onCancel, formValues, adminDataSubmit }) => {
       </button>
       <button
         className="green btn-flat right white-text"
-        onClick={() => adminDataSubmit(formValues)}
+        onClick={() => adminDataSubmit(formValues, history)}
       >
-        Send Data
+        Confirm
         <i className="material-icons right">done</i>
       </button>
     </div>
@@ -42,4 +43,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(adminFormReview);
+export default connect(mapStateToProps, actions)(withRouter(adminFormReview));

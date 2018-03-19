@@ -48,7 +48,9 @@ module.exports = function(app, passport) {
 
   })
 
-  app.get("/dashboard", (req, res) => {
+  app.post("/api/dashboard", async (req, res) => {
+    const { adviceDate, refCode, description, pubDate } = req.body;
+    console.log(req.body)
     res.send({})
   });
 

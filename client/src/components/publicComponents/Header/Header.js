@@ -18,8 +18,11 @@ class Header extends Component {
         ];
       default:
         return [
-          <li key="4">
+          <li key="1">
             <a href="/dashboard">Dashboard</a>
+          </li>,
+          <li key="2">
+            <a href="/dashboard/dataEntry">NewItem</a>
           </li>,
           <li key="3">
             <a href="/api/logout">Logout</a>

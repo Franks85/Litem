@@ -3,9 +3,12 @@ const {Schema} = mongoose;
 
 const dataEntrySchema = new Schema({
     adviceDate: Date,
-    refCode: Number,
+    refCode: {
+        type: Number,
+        unique: true
+    },
     description: String,
-    pubblicationDate: Date
+    pubDate: Date
 });
 
 module.exports = mongoose.model('dataEntry', dataEntrySchema);

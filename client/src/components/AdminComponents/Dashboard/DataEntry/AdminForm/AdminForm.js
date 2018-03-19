@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
+import { Link } from "react-router-dom";
 import _ from "lodash";
-import { inputField } from "../../../../utils/form/inputsField";
-import formFields from './formFields'
+import { inputField } from "../../../../../utils/form/inputsField";
+import formFields from "./formFields";
 
 class AdminDataEntry extends Component {
   renderField() {
@@ -28,12 +29,13 @@ class AdminDataEntry extends Component {
     const { error, handleSubmit, submitting } = this.props;
     return (
       <div className="center-align">
-        <div className="row">
+        <div className="row" style={{marginBottom: 50}}>
           <h2
             className="center-align pink-text"
             style={{ display: "inline-flex", verticalAlign: "middle" }}
           >
-            <i className="material-icons medium">account_circle</i>Admin Data Entry
+            <i className="material-icons medium">account_circle</i>Admin Data
+            Entry
           </h2>
           <div className="col offset-s3 s6">
             <form onSubmit={handleSubmit(this.submit)}>
@@ -41,13 +43,15 @@ class AdminDataEntry extends Component {
                 {error && <strong>{error}</strong>}
               </div>
               {this.renderField()}
-
+              <Link to="/dashboard" className="red btn-flat white-text left">
+                Cancel
+              </Link>
               <button
                 type="submit"
                 disabled={submitting}
-                className="teal btn-flat white-text"
+                className="teal btn-flat white-text right"
               >
-                Submit
+                Next
                 <i className="material-icons right">done</i>
               </button>
             </form>
@@ -61,8 +65,8 @@ class AdminDataEntry extends Component {
 function validate(values) {
   const errors = {};
 
-  if(isNaN(Number(values.refCode))) {
-    errors.refCode = 'RefCode must be a number'
+  if (isNaN(Number(values.refCode))) {
+    errors.refCode = "RefCode must be a number";
   }
 
   _.each(formFields, ({ name }) => {

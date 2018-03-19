@@ -53,7 +53,7 @@ class Signup extends Component {
           className="pink-text"
           style={{ display: "inline-flex", verticalAlign: "middle" }}
         >
-          <i class="material-icons medium">account_circle</i>SIGNUP
+          <i className="material-icons medium">account_circle</i>SIGNUP
         </h2>
         <div className="row">
           <div className="col offset-s3 s6">

@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { reduxForm } from "redux-form";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import * as actions from "../../../actions";
-import AdminForm from "./AdminForm/AdminDataEntry";
-import AdminFormReview from "./AdminForm/adminFormReview";
 
 class Dashboard extends Component {
-  state = {
-    showFormReview: false
-  };
-
   componentDidMount() {
     this.props.fetchUser();
     if (!this.props.auth) {
@@ -21,15 +14,15 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        {this.state.showFormReview ? (
-          <AdminFormReview
-            onCancel={() => this.setState({ showFormReview: false })}
-          />
-        ) : (
-          <AdminForm
-            onFormSubmit={() => this.setState({ showFormReview: true })}
-          />
-        )}
+        <h4 style={{ marginTop: 40 }}>Welcome to your admin dashboard! </h4>
+        <p>Click on the red button to start inserting your data. </p>
+        <h4>Item list...</h4>
+        <div className="fixed-action-btn">
+          <Link to="/dashboard/dataEntry" className="btn-floating btn-large red">
+            <i className="material-icons">add</i>
+          </Link>
+        </div>
+
       </div>
     );
   }
@@ -39,8 +32,4 @@ const mapStateToProps = ({ auth }) => {
   return { auth };
 };
 
-Dashboard = connect(mapStateToProps, actions)(Dashboard);
-
-export default reduxForm({
-  form: "dataEntry"
-})(Dashboard);
+export default connect(mapStateToProps, actions)(Dashboard);
