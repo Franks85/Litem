@@ -1,15 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
-import * as actions from "../../../actions";
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-    if (!this.props.auth) {
-      return <Redirect to="/" />;
-    }
-  }
 
   render() {
     return (
@@ -18,18 +10,16 @@ class Dashboard extends Component {
         <p>Click on the red button to start inserting your data. </p>
         <h4>Item list...</h4>
         <div className="fixed-action-btn">
-          <Link to="/dashboard/dataEntry" className="btn-floating btn-large red">
+          <Link
+            to="/dashboard/dataEntry"
+            className="btn-floating btn-large red"
+          >
             <i className="material-icons">add</i>
           </Link>
         </div>
-
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  return { auth };
-};
-
-export default connect(mapStateToProps, actions)(Dashboard);
+export default Dashboard;

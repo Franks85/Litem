@@ -5,9 +5,6 @@ module.exports = function(app, passport) {
   });
 
   // auth route
-  app.get("/api/login", function(req, res) {
-    res.send({});
-  });
   
   app.post('/api/login', function(req, res, next) {
     passport.authenticate('login', function(err, user, info) {
@@ -23,10 +20,6 @@ module.exports = function(app, passport) {
     })(req, res, next);
   });
 
-
-  app.get("/api/register", function(req, res, info) {
-    res.send({});
-  });
   app.post('/api/register', function(req, res, next) {
     passport.authenticate('register', function(err, user, info) {
       if (err) { return next(err) }
@@ -48,12 +41,6 @@ module.exports = function(app, passport) {
 
   })
 
-  app.post("/api/dashboard", async (req, res) => {
-    const { adviceDate, refCode, description, pubDate } = req.body;
-    console.log(req.body)
-    res.send({})
-  });
-
   app.get("/api/logout", function(req, res) {
     req.logout();
     res.redirect("/");
@@ -66,7 +53,3 @@ module.exports = function(app, passport) {
   });
 };
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect("/");
-}

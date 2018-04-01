@@ -29,7 +29,6 @@ class Login extends Component {
   }
 
   submit = values => {
-    console.log(values);
     let self = this;
     return new Promise((resolve, reject) => {
       axios.post("/api/login", values).then(function(response) {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./actions";
+import requireLogin from './hoc/require_auth'
 
 import Header from "./components/publicComponents/Header/Header";
 import Landing from './components/publicComponents/Landing/Landing';
@@ -26,8 +27,8 @@ class App extends Component {
             <Route path="/" exact component={Landing} />
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
-            <Route path='/dashboard' exact component={Dashboard} />
-            <Route path='/dashboard/dataEntry' component={DataEntry} />
+            <Route path='/dashboard' exact component={requireLogin(Dashboard)} />
+            <Route path='/dashboard/dataEntry' component={requireLogin(DataEntry)} />
           </div>
         </BrowserRouter>
       </div>

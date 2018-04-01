@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import { inputField } from "../../../../../utils/form/inputsField";
@@ -21,15 +22,31 @@ class AdminDataEntry extends Component {
   }
 
   submit = values => {
-    console.log(values);
     this.props.onFormSubmit();
   };
 
   render() {
+    const errorMsg = (
+      <div className="row">
+        <div className="col s12">
+          <div className="card red lighten-1">
+            <div className="card-content white-text">
+              <span
+                className="card-title"
+                style={{ textTransform: "uppercase" }}
+              >
+                {this.props.clientMsg}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
     const { error, handleSubmit, submitting } = this.props;
+
     return (
       <div className="center-align">
-        <div className="row" style={{marginBottom: 50}}>
+        <div className="row" style={{ marginBottom: 50 }}>
           <h2
             className="center-align pink-text"
             style={{ display: "inline-flex", verticalAlign: "middle" }}
@@ -37,7 +54,9 @@ class AdminDataEntry extends Component {
             <i className="material-icons medium">account_circle</i>Admin Data
             Entry
           </h2>
+
           <div className="col offset-s3 s6">
+          {this.props.clientMsg ? errorMsg : null}
             <form onSubmit={handleSubmit(this.submit)}>
               <div className="red-text" style={{ padding: 20, fontSize: 18 }}>
                 {error && <strong>{error}</strong>}
@@ -78,8 +97,16 @@ function validate(values) {
   return errors;
 }
 
+const mapStateToProps = state => {
+  return {
+    clientMsg: state.admin.clientMsg
+  };
+};
+
+const admin = connect(mapStateToProps)(AdminDataEntry);
+
 export default reduxForm({
   validate,
   destroyOnUnmount: false,
   form: "dataEntry"
-})(AdminDataEntry);
+})(admin);

@@ -1,20 +1,24 @@
 const mongoose = require("mongoose");
-
 const DataModel = mongoose.model("dataEntry");
 
 module.exports = function(app) {
-  app.post("/api/model", async (req, res) => {
-    const {
-      adviceDate,
-      refCode,
-      description,
-      pubblicationDate
-    } = req.body;
+  app.post("/api/dashboard", async (req, res, next) => {
+    const { adviceDate, refCode, description, pubDate } = req.body;
 
-    const dataModel = new DataModel({
-      
-    });
+    try {
+      const newItem = await new DataModel({
+        adviceDate,
+        refCode,
+        description,
+        pubDate
+      });
 
-    
+      await newItem.save();
+      res.json({ success: "Item saved to database" });
+    } catch (error) {
+      if (error) {
+        res.json({ error: "Please insert a new valid refCode" });
+      }
+    }
   });
 };

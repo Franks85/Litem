@@ -9,7 +9,7 @@ const morgan = require("morgan");
 const path = require("path");
 // the order of require statement is important
 require("./models/User");
-require('./models/dataEntry')
+require("./models/dataEntry");
 require("./services/passport")(passport);
 
 mongoose.Promise = global.Promise;
@@ -59,7 +59,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/authRoutes")(app, passport);
-require('./routes/dataEntryRoutes')(app);
+require("./routes/dataEntryRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   // express serve up production assets (like main.js file)
@@ -71,6 +71,11 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+// errors middleware
+
+const errorMid = require("./middleware/generic_err_handler");
+app.use(errorMid);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);

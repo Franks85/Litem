@@ -25,6 +25,7 @@ class DataEntry extends Component {
   }
 }
 
+
 export default reduxForm({
   form: "dataEntry"
 })(DataEntry);
