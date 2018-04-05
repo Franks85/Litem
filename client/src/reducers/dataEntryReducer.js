@@ -3,7 +3,9 @@ import * as actionType from "../actions/types";
 const initialstate = {
   clientMsg: "",
   itemSaved: false,
-  fail: true
+  fail: true,
+  items: [],
+  fetchError: ''
 };
 
 export default function(state = initialstate, action) {
@@ -22,6 +24,12 @@ export default function(state = initialstate, action) {
         itemSaved: false,
         fail: true
       };
+    case actionType.ADMIN_FETCH_ITEM:
+      return {
+        ...state,
+        items: action.payload || [],
+        fetchError: action.meta || null
+      }
     default: 
       return state;
   }

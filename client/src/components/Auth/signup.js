@@ -3,6 +3,7 @@ import { reduxForm, Field, SubmissionError } from "redux-form";
 import { inputField } from "../../utils/form/inputsField";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import Spinner from '../../UI/spinner/spinner';
 
 class Signup extends Component {
   state = {
@@ -47,6 +48,8 @@ class Signup extends Component {
       return <Redirect to="/dashboard" />;
     }
     const { error, handleSubmit, submitting } = this.props;
+    const spinner = submitting ? <Spinner /> : null
+
     return (
       <div className="center-align">
         <h2
@@ -71,6 +74,7 @@ class Signup extends Component {
                 Submit
                 <i className="material-icons right">done</i>
               </button>
+              {spinner}
             </form>
             <p>Have an account? Please <a href='/login'>Login</a></p>
           </div>

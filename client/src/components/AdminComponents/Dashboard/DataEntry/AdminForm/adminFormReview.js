@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import * as actions from "../../../../../actions";
 import _ from "lodash";
 import formFields from "./formFields";
@@ -11,20 +11,18 @@ class adminFormReview extends Component {
   };
 
   componentWillUpdate(nextProps) {
-    if (
-      nextProps.success !== this.props.success
-    ) {
+    if (nextProps.success !== this.props.success) {
       this.setState({
         submitMessage: nextProps.clientMsg
       });
     }
-    if(nextProps.fail === true) {
-      this.props.onCancel()
+    if (nextProps.fail === true) {
+      this.props.onCancel();
     }
   }
 
   render() {
-    const { onCancel, onFormSubmit , formValues, adminDataSubmit } = this.props;
+    const { onCancel, formValues, adminDataSubmit } = this.props;
 
     const reviewFields = _.map(formFields, ({ label, name }) => {
       return (
@@ -38,19 +36,10 @@ class adminFormReview extends Component {
     const successMsg = (
       <div className="row">
         <div className="col s12 m8">
-          <div className="card green lighten-1">
-            <div className="card-content black-text">
-              <span
-                className="card-title"
-                style={{ textTransform: "uppercase" }}
-              >
-                {this.state.submitMessage}
-              </span>
-            </div>
-            <div className="card-action">
-              <a href='/dashboard'>Add new Item</a>
-            </div>
+          <div class="alert alert-success fade show">
+            {this.state.submitMessage}
           </div>
+          <p><a href='/dashboard'>ADD NEW ITEM</a></p>
         </div>
       </div>
     );

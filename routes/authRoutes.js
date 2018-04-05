@@ -45,11 +45,5 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect("/");
   });
-
-  // enable routing width react
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve("client", "public", "index.html"));
-  });
 };
 
