@@ -25,7 +25,7 @@ module.exports = function(app) {
 
   app.get("/api/dashboard", async (req, res) => {
     try {
-      const items = await DataModel.find({ _user: req.user.id }).limit(8);
+      const items = await DataModel.find({ _user: req.user.id }).sort([['adviceDate', 1]]);
       res.send(items);
     } catch (error) {
       if (error) {
