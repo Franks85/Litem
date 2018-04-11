@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Navbar, NavItem } from 'react-materialize'
 
 class Header extends Component {
   renderContent() {
@@ -33,18 +34,11 @@ class Header extends Component {
 
   render() {
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <Link
-            to={this.props.auth ? "/dashboard" : "/"}
-            className="left brand-logo"
-          >
-            Litem
-          </Link>
-          <ul className="right">{this.renderContent()}</ul>
-        </div>
-      </nav>
-    );
+     
+      <Navbar brand='LITEM' right>
+        <NavItem>{this.renderContent()}</NavItem>
+      </Navbar>
+    )
   }
 }
 

@@ -83,7 +83,7 @@ class Dashboard extends Component {
         <h4 style={{ marginTop: 40 }}>Welcome to your admin dashboard! </h4>
         <p>Click on the red button to start inserting your data. </p>
         {this.props.deleteMsg ? deleteMsg : null}
-        <h4>Search Item by RefCode:</h4>
+        <h5>Search Item by RefCode:</h5>
         <SearchBar
           onChange={this.handleSearchChange}
           onClick={this.handleSearchClick}
