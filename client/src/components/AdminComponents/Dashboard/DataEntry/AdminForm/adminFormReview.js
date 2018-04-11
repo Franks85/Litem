@@ -36,7 +36,7 @@ class adminFormReview extends Component {
     const successMsg = (
       <div className="row">
         <div className="col s12 m8">
-          <div class="alert alert-success fade show">
+          <div className="alert alert-success fade show">
             {this.state.submitMessage}
           </div>
           <p><a href='/dashboard'>ADD NEW ITEM</a></p>

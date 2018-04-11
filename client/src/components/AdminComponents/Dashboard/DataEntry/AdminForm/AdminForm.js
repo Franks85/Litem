@@ -30,7 +30,7 @@ class AdminDataEntry extends Component {
     const errorMsg = (
       <div className="row">
         <div className="col s12">
-          <div class="alert alert-danger fade show">{this.props.clientMsg}</div>
+          <div className="alert alert-danger fade show">{this.props.clientMsg}</div>
         </div>
       </div>
     );

@@ -9,7 +9,8 @@ import Landing from './components/publicComponents/Landing/Landing';
 import Login from './components/Auth/login'
 import Signup from './components/Auth/signup'
 import Dashboard from './components/AdminComponents/Dashboard/Dashboard';
-import DataEntry from './components/AdminComponents/Dashboard/DataEntry/DataEntry'
+import DataEntry from './components/AdminComponents/Dashboard/DataEntry/DataEntry';
+import ItemDetail from './components/AdminComponents/Dashboard/ItemDetail/ItemDetail'
 
 class App extends Component {
   
@@ -29,6 +30,7 @@ class App extends Component {
             <Route path='/signup' component={Signup} />
             <Route path='/dashboard' exact component={requireLogin(Dashboard)} />
             <Route path='/dashboard/dataEntry' component={requireLogin(DataEntry)} />
+            <Route path='/dashboard/detail' component={requireLogin(ItemDetail)} />
           </div>
         </BrowserRouter>
       </div>

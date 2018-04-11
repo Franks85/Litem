@@ -5,7 +5,11 @@ const initialstate = {
   itemSaved: false,
   fail: true,
   items: [],
-  fetchError: ''
+  fetchError: '',
+  itemDetail: [],
+  searchFailMsg: '',
+  deleteSuccessMsg: '',
+  deleteFailMsg: ''
 };
 
 export default function(state = initialstate, action) {
@@ -27,9 +31,22 @@ export default function(state = initialstate, action) {
     case actionType.ADMIN_FETCH_ITEM:
       return {
         ...state,
-        items: action.payload || [],
+        items: action.payload,
         fetchError: action.meta || null
       }
+    case actionType.ADMIN_ITEM_SEARCH:
+      return {
+        ...state,
+        itemDetail: action.payload,
+        searchFailMsg: action.meta
+      }
+    case actionType.ADMIN_ITEM_DELETE:
+     return {
+      ...state,
+      deleteSuccessMsg: action.success,
+      deleteFailMsg: action.error,
+      items: state.items.filter(item => item !== action.payload)
+     }
     default: 
       return state;
   }

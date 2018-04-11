@@ -3,7 +3,9 @@ import {
   FETCH_USER,
   ADMIN_SUBMIT_SUCCESS,
   ADMIN_SUBMIT_FAILED,
-  ADMIN_FETCH_ITEM
+  ADMIN_FETCH_ITEM,
+  ADMIN_ITEM_SEARCH,
+  ADMIN_ITEM_DELETE
 } from "./types";
 
 // authReducer
@@ -38,7 +40,51 @@ export const fetchItems = () => dispatch => {
     })
     .catch(error => {
       if (error) {
-        dispatch({ type: ADMIN_FETCH_ITEM, meta: error})
+        dispatch({ type: ADMIN_FETCH_ITEM, meta: error });
+      }
+    });
+};
+
+export const searchItem = value => dispatch => {
+  axios
+    .post("/api/dashboard/detail", { refCode: value })
+    .then(res => {
+      const item = res.data.item;
+      if (item) {
+        dispatch({ type: ADMIN_ITEM_SEARCH, payload: item, meta: "" });
+      } else {
+        dispatch({
+          type: ADMIN_ITEM_SEARCH,
+          payload: [],
+          meta: res.data.error
+        });
+      }
+    })
+    .catch(error => {
+      if (error) {
+        console.log(error);
+      }
+    });
+};
+
+export const deleteItem = item => dispatch => {
+  axios
+    .post("/api/dashboard/detail/delete", { refCode: item[0].refCode })
+    .then(res => {
+      const item = res.data;
+      if (item) {
+        dispatch({
+          type: ADMIN_ITEM_DELETE,
+          payload: item,
+          success: "Item deleted"
+        });
+      } else {
+        dispatch({ type: ADMIN_ITEM_DELETE, payload: [], error: item.error });
+      }
+    })
+    .catch(error => {
+      if (error) {
+        console.log(error);
       }
     });
 };
