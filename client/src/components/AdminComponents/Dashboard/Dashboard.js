@@ -78,24 +78,34 @@ class Dashboard extends Component {
       </div>
     );
 
+    const searchBar = this.props.items ? (
+      <SearchBar
+        onChange={this.handleSearchChange}
+        onClick={this.handleSearchClick}
+        value={this.state.searchValue}
+      />
+    ) : null;
+
     return (
-      <div>
+      <div className='container'>
         <h4 style={{ marginTop: 40 }}>Welcome to your admin dashboard! </h4>
         <p>Click on the red button to start inserting your data. </p>
         {this.props.deleteMsg ? deleteMsg : null}
         <h5>Search Item by RefCode:</h5>
-        <SearchBar
-          onChange={this.handleSearchChange}
-          onClick={this.handleSearchClick}
-          value={this.state.searchValue}
-          style={{ margin: "40px 0px" }}
-        />
-        {perPageList}
-        <Pagination
-          style={{ marginTop: "60px" }}
-          items={fullItemsList}
-          onChangePage={this.onChangePage}
-        />
+        <div className="row">
+          <div className="col s12">{searchBar}</div>
+        </div>
+        <div className="row">
+          <div className="col-s12">{perPageList}</div>
+        </div>
+        <div className="row">
+          <div className="col-s12">
+            <Pagination
+              items={fullItemsList}
+              onChangePage={this.onChangePage}
+            />
+          </div>
+        </div>
         <div className="fixed-action-btn">
           <Link
             to="/dashboard/dataEntry"
