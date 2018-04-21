@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const keys = require("./config/keys");
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
+const session = require("cookie-session");
 const morgan = require("morgan");
 const path = require("path");
 // the order of require statement is important
@@ -50,9 +50,7 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(
   session({
-    secret: "sdhkksdhkfsdkh",
-    saveUninitialized: true,
-    resave: true
+    secret: "sdhkksdhkfsdkh"
   })
 );
 app.use(passport.initialize());

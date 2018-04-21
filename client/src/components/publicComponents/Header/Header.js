@@ -26,7 +26,7 @@ class Header extends Component {
             <NavLink to="/dashboard/dataEntry">NewItem</NavLink>
           </li>,
           <li key="3">
-            <NavLink to="/api/logout">Logout</NavLink>
+            <a href="/api/logout">Logout</a>
           </li>
         ];
     }
