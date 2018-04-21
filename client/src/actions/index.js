@@ -19,6 +19,7 @@ export const adminDataSubmit = values => dispatch => {
   axios
     .post("/api/dashboard", values)
     .then(res => {
+      console.log(res.data)
       if (res.data.error) {
         dispatch({ type: ADMIN_SUBMIT_FAILED, payload: res.data.error });
       } else {

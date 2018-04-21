@@ -3,25 +3,7 @@ import { connect } from "react-redux";
 import { deleteItem } from "../../../../actions";
 import { Link } from "react-router-dom";
 import { Button, Modal, Icon } from "react-materialize";
-import styled from "styled-components";
-
-const ItemContainer = styled.div`
-  padding: 20px;
-  font-weight: "bold";
-  background: papayawhip;
-  min-height: 300px;
-`;
-
-const ItemField = styled.p`
-  padding: 10px 0px;
-  text-transform: uppercase;
-  color: palevioletred;
-`;
-
-const SpanField = styled.span`
-  color: rgba(0, 0, 0, 0.87);
-  margin-left: 5px;
-`;
+import { ItemContainer, ItemField, SpanField} from '../../../../UI/itemStyle/itemStyle'
 
 class ItemDetail extends Component {
   deleteAction = () => {

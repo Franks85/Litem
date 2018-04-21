@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 import { fetchItems, searchItem } from "../../../actions/index";
 import Pagination from "../../../UI/pagination/pagination";
 import SearchBar from "../../../UI/SearchBar/searchBar";
+import {
+  ItemField,
+  SpanField,
+  ItemContainer
+} from "../../../UI/itemStyle/itemStyle";
 
 class Dashboard extends Component {
   state = {
@@ -37,29 +42,29 @@ class Dashboard extends Component {
   render() {
     const perPageList = this.state.pageOfItems.map(item => {
       return (
-        <div
-          className="card red lighten-4"
-          style={{ padding: "40px 0px" }}
-          key={item._id}
-        >
-          <div
-            className="card-content"
-            style={{ textTransform: "uppercase", fontWeight: "bold" }}
-          >
-            <span className="card-title blue-text">
-              ITEM REF: {item.refCode}
-            </span>
-            <p>
-              Description: <span>{item.description}</span>
-            </p>
-            <p>
+        <div key={item._id}>
+          <ItemContainer>
+            <h5>
+              ITEM REF: <SpanField>{item.refCode}</SpanField>
+            </h5>
+            <ItemField className="right">
+              Saved On:
+              <SpanField>
+                {new Date(item.adviceDate).toLocaleDateString()}
+              </SpanField>
+            </ItemField>
+            <ItemField>
+              Description:
+              <SpanField>{item.description}</SpanField>
+            </ItemField>
+            <ItemField>
               Publication Date:
-              <span>{new Date(item.pubDate).toLocaleDateString()}</span>
-            </p>
-            <p className="right">
-              Saved On: {new Date(item.adviceDate).toLocaleDateString()}
-            </p>
-          </div>
+              <SpanField>
+                {new Date(item.pubDate).toLocaleDateString()}
+              </SpanField>
+            </ItemField>
+          </ItemContainer>
+          <div style={{padding: '12px 0px'}}></div>
         </div>
       );
     });
@@ -87,7 +92,7 @@ class Dashboard extends Component {
     ) : null;
 
     return (
-      <div className='container'>
+      <div className="container">
         <h4 style={{ marginTop: 40 }}>Welcome to your admin dashboard! </h4>
         <p>Click on the red button to start inserting your data. </p>
         {this.props.deleteMsg ? deleteMsg : null}
@@ -95,6 +100,7 @@ class Dashboard extends Component {
         <div className="row">
           <div className="col s12">{searchBar}</div>
         </div>
+        <h5>Items List</h5>
         <div className="row">
           <div className="col-s12">{perPageList}</div>
         </div>

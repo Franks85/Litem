@@ -5,22 +5,24 @@ module.exports = function(app) {
   app.post("/api/dashboard", async (req, res) => {
     const { adviceDate, refCode, description, pubDate } = req.body;
 
-    try {
-      const newItem = await new DataModel({
-        _user: req.user.id,
-        adviceDate,
-        refCode,
-        description,
-        pubDate
-      });
+    const newItem = await new DataModel({
+      _user: req.user.id,
+      adviceDate,
+      refCode,
+      description,
+      pubDate
+    });
 
-      await newItem.save();
-      res.json({ success: "Item saved to database" });
-    } catch (error) {
-      if (error) {
-        res.json({ error: "Please insert a new valid refCode" });
+    await newItem.save().then(
+      () => {
+        res.send({ success: "Item saved to database" });
+      },
+      e => {
+        if(e.code === 11000) {
+          res.send({error: 'Please insert a new valid REF CODE'})
+        } 
       }
-    }
+    );
   });
 
   app.get("/api/dashboard", async (req, res) => {
@@ -31,7 +33,7 @@ module.exports = function(app) {
       res.send(items);
     } catch (error) {
       if (error) {
-        res.json({ error: "No items found, try to add one" });
+        res.send({ error: "No items found, try to add one" });
       }
     }
   });
@@ -45,27 +47,27 @@ module.exports = function(app) {
       if (item.length) {
         res.send({ item });
       } else {
-        res.json({
+        res.send({
           error: "No item found, please search for a existing RefCode"
         });
       }
     } catch (error) {
       if (error) {
-        res.json({ error: "Ops something goes wrong :(" });
+        res.send({ error: "Ops something goes wrong :(" });
       }
     }
   });
 
-  app.post('/api/dashboard/detail/delete', async (req, res) => {
+  app.post("/api/dashboard/detail/delete", async (req, res) => {
     const { refCode } = req.body;
-    console.log(refCode)
-    try{
-      const item = await DataModel.findOneAndRemove({refCode});
+    console.log(refCode);
+    try {
+      const item = await DataModel.findOneAndRemove({ refCode });
       res.send(item);
     } catch (error) {
-      if(error) {
-        res.json({ error: "Ops something goes wrong :( try later" });
+      if (error) {
+        res.send({ error: "Ops something goes wrong :( try later" });
       }
     }
-  })
+  });
 };
