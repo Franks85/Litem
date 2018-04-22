@@ -43,6 +43,7 @@ module.exports = function(app, passport) {
 
   app.get("/api/logout", function(req, res) {
     req.logout();
+    req.session = null;
     res.redirect("/");
   });
 };
