@@ -1,30 +1,43 @@
 import axios from "axios";
 import {
   FETCH_USER,
+  LOADING_CONTENT,
+  AUTH_FAIL,
+  AUTH_SUCCESS,
   ADMIN_SUBMIT_SUCCESS,
   ADMIN_SUBMIT_FAILED,
   ADMIN_FETCH_ITEM,
+  ITEMS_FETCH_FAIL,
+  ITEMS_FETCH_SUCCESS,
   ADMIN_ITEM_SEARCH,
   ADMIN_ITEM_DELETE
 } from "./types";
 
 // authReducer
 export const fetchUser = () => async dispatch => {
+  dispatch({ type: LOADING_CONTENT });
   const res = await axios.get("/api/profile");
-  return dispatch({ type: FETCH_USER, payload: res.data });
+  if (!res.data) {
+    return dispatch({ type: AUTH_FAIL });
+  }
+  dispatch(authenticate());
+  dispatch({ type: FETCH_USER, payload: res.data });
 };
+
+export const authenticate = () => dispatch => {
+  dispatch({type: AUTH_SUCCESS})
+}
 
 // adminReducer
 export const adminDataSubmit = values => dispatch => {
   axios
     .post("/api/dashboard", values)
     .then(res => {
-      console.log(res.data)
       if (res.data.error) {
-        dispatch({ type: ADMIN_SUBMIT_FAILED, payload: res.data.error });
-      } else {
+        return dispatch({ type: ADMIN_SUBMIT_FAILED, payload: res.data.error });
+      } 
         dispatch({ type: ADMIN_SUBMIT_SUCCESS, payload: res.data.success });
-      }
+      
     })
     .catch(error => {
       if (error) {
@@ -34,14 +47,16 @@ export const adminDataSubmit = values => dispatch => {
 };
 
 export const fetchItems = () => dispatch => {
+  dispatch({ type: LOADING_CONTENT });
   axios
     .get("/api/dashboard")
     .then(res => {
       dispatch({ type: ADMIN_FETCH_ITEM, payload: res.data });
+      dispatch({ type: ITEMS_FETCH_SUCCESS });
     })
     .catch(error => {
       if (error) {
-        dispatch({ type: ADMIN_FETCH_ITEM, meta: error });
+        dispatch({ type: ITEMS_FETCH_FAIL, error: error });
       }
     });
 };

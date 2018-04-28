@@ -9,6 +9,7 @@ import {
   SpanField,
   ItemContainer
 } from "../../../UI/itemStyle/itemStyle";
+import { Row, Col, Preloader } from "react-materialize";
 
 class Dashboard extends Component {
   state = {
@@ -40,38 +41,50 @@ class Dashboard extends Component {
   };
 
   render() {
-    const perPageList = this.state.pageOfItems.map(item => {
-      return (
-        <div key={item._id}>
-          <ItemContainer>
-            <h5>
-              ITEM REF: <SpanField>{item.refCode}</SpanField>
-            </h5>
-            <ItemField className="right">
-              Saved On:
-              <SpanField>
-                {new Date(item.adviceDate).toLocaleDateString()}
-              </SpanField>
-            </ItemField>
-            <ItemField>
-              Description:
-              <SpanField>{item.description}</SpanField>
-            </ItemField>
-            <ItemField>
-              Publication Date:
-              <SpanField>
-                {new Date(item.pubDate).toLocaleDateString()}
-              </SpanField>
-            </ItemField>
-          </ItemContainer>
-          <div style={{padding: '12px 0px'}}></div>
-        </div>
-      );
-    });
+    const perPageList = this.props.loading ? (
+      <Row>
+        <Col s={4}>
+          <Preloader flashing />
+        </Col>
+      </Row>
+    ) : (
+      this.state.pageOfItems.map(item => {
+        return (
+          <div key={item._id}>
+            <ItemContainer>
+              <h5>
+                ITEM REF: <SpanField>{item.refCode}</SpanField>
+              </h5>
+              <ItemField className="right">
+                Saved On:
+                <SpanField>
+                  {new Date(item.adviceDate).toLocaleDateString()}
+                </SpanField>
+              </ItemField>
+              <ItemField>
+                Description:
+                <SpanField>{item.description}</SpanField>
+              </ItemField>
+              <ItemField>
+                Publication Date:
+                <SpanField>
+                  {new Date(item.pubDate).toLocaleDateString()}
+                </SpanField>
+              </ItemField>
+            </ItemContainer>
+            <div style={{ padding: "12px 0px" }} />
+          </div>
+        );
+      })
+    );
 
-    const fullItemsList = this.props.items.sort(function(a, b) {
-      return new Date(b.adviceDate) - new Date(a.adviceDate);
-    });
+ 
+
+    const fullItemsList = (!this.props.items.error)
+      ? this.props.items.sort(function(a, b) {
+          return new Date(b.adviceDate) - new Date(a.adviceDate);
+        })
+      : null;
 
     const deleteMsg = (
       <div className="row">
@@ -129,7 +142,9 @@ const mapStateToProps = state => {
   return {
     items: state.admin.items,
     itemDetail: state.admin.itemDetail,
-    deleteMsg: state.admin.deleteSuccessMsg
+    deleteMsg: state.admin.deleteSuccessMsg,
+    loading: state.admin.loading,
+    authenticated: state.auth.authenticated
   };
 };
 

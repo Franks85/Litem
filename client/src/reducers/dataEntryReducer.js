@@ -1,6 +1,7 @@
 import * as actionType from "../actions/types";
 
 const initialstate = {
+  loading: false,
   clientMsg: "",
   itemSaved: false,
   fail: true,
@@ -14,6 +15,11 @@ const initialstate = {
 
 export default function(state = initialstate, action) {
   switch (action.type) {
+    case actionType.LOADING_CONTENT:
+      return {
+        ...state,
+        loading: true
+      }
     case actionType.ADMIN_SUBMIT_SUCCESS:
       return {
         ...state,
@@ -31,9 +37,22 @@ export default function(state = initialstate, action) {
     case actionType.ADMIN_FETCH_ITEM:
       return {
         ...state,
-        items: action.payload,
-        fetchError: action.meta || null
+        items: action.payload || false,
+        fetchError: ''
+        
       }
+    case actionType.ITEMS_FETCH_FAIL:
+     return {
+        ...state,
+        items: null,
+        fetchError: action.error
+
+     }
+    case actionType.ITEMS_FETCH_SUCCESS:
+     return {
+       ...state,
+       loading: false
+     }
     case actionType.ADMIN_ITEM_SEARCH:
       return {
         ...state,

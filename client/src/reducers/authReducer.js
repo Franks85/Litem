@@ -1,7 +1,9 @@
 import * as actionType from "../actions/types";
 
 const initialstate = {
-  user: null
+  user: false,
+  loading: false,
+  authenticated: false
 };
 
 export default function(state = initialstate, action) {
@@ -10,6 +12,23 @@ export default function(state = initialstate, action) {
       return {
         ...state,
         user: action.payload || false
+      }
+    case actionType.LOADING_CONTENT:
+      return {
+        ...state,
+        loading: true
+      }
+      case actionType.AUTH_FAIL:
+      return {
+        ...state,
+        loading: false,
+        authenticated: false
+      }
+      case actionType.AUTH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        authenticated: true
       }
 
     default:

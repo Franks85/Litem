@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 const propTypes = {
-  items: PropTypes.array.isRequired,
+  items: PropTypes.array,
   onChangePage: PropTypes.func.isRequired,
   initialPage: PropTypes.number
 };
@@ -33,7 +33,7 @@ class Pagination extends React.Component {
   }
 
   setPage(page) {
-    var items = this.props.items;
+    var items = this.props.items || [];
     var pager = this.state.pager;
 
     if (page < 1 || page > pager.totalPages) {
@@ -41,7 +41,10 @@ class Pagination extends React.Component {
     }
 
     // get new pager object for specified page
-    pager = this.getPager(items.length, page);
+    if(items.length) {
+      pager = this.getPager(items.length, page);
+    }
+    
 
     // get new page of items from items array
     var pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
