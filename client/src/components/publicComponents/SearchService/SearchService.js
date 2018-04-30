@@ -18,6 +18,7 @@ export class SearchService extends Component {
               
           </Col>
         </Row>
+        <Row></Row>
       </div>
     );
   }
