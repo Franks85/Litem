@@ -5,9 +5,13 @@ import * as actions from "./actions";
 import requireLogin from "./hoc/require_auth";
 import './App.css'
 
+// Public components
 import Header from "./components/publicComponents/Header/Header";
 import Footer from "./components/publicComponents/Footer/Footer";
 import Landing from "./components/publicComponents/Landing/Landing";
+import SearchService from './components/publicComponents/SearchService/SearchService';
+
+// Admin components
 import Login from "./components/Auth/login";
 import Signup from "./components/Auth/signup";
 import Dashboard from "./components/AdminComponents/Dashboard/Dashboard";
@@ -29,6 +33,7 @@ class App extends Component {
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
+              <Route path="/service" component={SearchService} />
               <Route
                 path="/dashboard"
                 exact
