@@ -15,15 +15,9 @@ require("./services/passport")(passport);
 
 mongoose.Promise = global.Promise;
 
-if (process.env.NODE_ENV === "production") {
-  mongoose.connect(keys.mongoURI, {
-    useMongoClient: true
-  });
-} else {
-  mongoose.connect("mongodb://localhost/lost_test", {
-    useMongoClient: true
-  });
-}
+mongoose.connect(keys.mongoURI, {
+  useMongoClient: true
+});
 
 const app = express();
 
