@@ -16,9 +16,11 @@ To run the project on your machine you have to insert your Mongo settings in con
 example: 
 
 module.exports = {
-    mongoURI: "mongodb://your settings here", 
+    mongoURI: "mongodb://your settings here"
+    };
+    
     // To run in your local machine you have to change the line above with your Mongo settings
-};
+
 
 USAGE
 
