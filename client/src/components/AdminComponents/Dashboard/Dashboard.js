@@ -143,8 +143,7 @@ const mapStateToProps = state => {
     items: state.admin.items,
     itemDetail: state.admin.itemDetail,
     deleteMsg: state.admin.deleteSuccessMsg,
-    loading: state.admin.loading,
-    authenticated: state.auth.authenticated
+    loading: state.admin.loading
   };
 };
 

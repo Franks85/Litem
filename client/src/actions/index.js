@@ -13,7 +13,7 @@ import {
   ADMIN_ITEM_DELETE
 } from "./types";
 
-// authReducer
+// auth
 export const fetchUser = () => async dispatch => {
   dispatch({ type: LOADING_CONTENT });
   const res = await axios.get("/api/profile");
@@ -28,7 +28,7 @@ export const authenticate = () => dispatch => {
   dispatch({type: AUTH_SUCCESS})
 }
 
-// adminReducer
+// admin
 export const adminDataSubmit = values => dispatch => {
   axios
     .post("/api/dashboard", values)
@@ -104,3 +104,7 @@ export const deleteItem = item => dispatch => {
       }
     });
 };
+
+// Search Items Service 
+
+

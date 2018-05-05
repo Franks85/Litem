@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import * as actions from "../../../../../actions";
 import _ from "lodash";
 import formFields from "./formFields";
@@ -39,7 +39,7 @@ class adminFormReview extends Component {
           <div className="alert alert-success fade show">
             {this.state.submitMessage}
           </div>
-          <p><a href='/dashboard'>ADD NEW ITEM</a></p>
+          <p><Link to='/dashboard'>ADD NEW ITEM</Link></p>
         </div>
       </div>
     );
