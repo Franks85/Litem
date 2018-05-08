@@ -3,18 +3,23 @@ import _ from "lodash";
 
 const validate = values => {
   const errors = {};
-// SSF3
+  // SSF3
+
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
       errors[name] = "Required";
     }
   });
 
-  if (isNaN(Number(values.phone))) {
+  if (!values.phone) {
+    errors.phone = "Required";
+  } else if (isNaN(Number(values.phone))) {
     errors.phone = "Phone must be a number";
   }
 
-  if (isNaN(Number(values.postal))) {
+  if (!values.postal) {
+    errors.postal = "Required";
+  } else if (isNaN(Number(values.postal))) {
     errors.postal = "Postal Code must be a number";
   }
 
@@ -33,10 +38,10 @@ const validate = values => {
   if (!values.lossDate) {
     errors.lossDate = "Required";
   } else {
-    const selectDate = new Date(values.lossDate)
-    let maxDate = new Date()
-    if(selectDate > maxDate) {
-      errors.lossDate = 'Loss Date must be in the past..'
+    const selectDate = new Date(values.lossDate);
+    let maxDate = new Date();
+    if (selectDate > maxDate) {
+      errors.lossDate = "Loss Date must be in the past..";
     }
   }
   if (!values.lossPlace) {

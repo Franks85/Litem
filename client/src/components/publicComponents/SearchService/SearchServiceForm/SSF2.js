@@ -25,7 +25,7 @@ const SSF2 = props => {
               component={inputField}
             />
             <Field
-              name="Brand"
+              name="brand"
               label="Brand"
               type="text"
               component={inputField}

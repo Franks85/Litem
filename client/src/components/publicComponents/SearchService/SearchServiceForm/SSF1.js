@@ -16,17 +16,17 @@ const SSF1 = props => {
           <form onSubmit={handleSubmit}>
             <Field
               name="lossDate"
-              label="Date of loss"
+              label="Date of loss *"
               type="date"
               component={inputField}
             />
             <Field
               name="lossPlace"
-              label="Place of loss"
+              label="Place of loss *"
               type="text"
               component={inputField}
             />
-            <label>Object Type</label>
+            <label>Object Type *</label>
             <Field
               name="itemSelected"
               component={renderDropdownList}

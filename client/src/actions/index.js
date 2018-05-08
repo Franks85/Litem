@@ -1,4 +1,6 @@
 import axios from "axios";
+import { makeActionCreator, makeAsyncActionCreator } from "redux-toolbelt";
+import { makeThunkAsyncActionCreator } from "redux-toolbelt-thunk";
 import {
   FETCH_USER,
   LOADING_CONTENT,
@@ -24,9 +26,11 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export const authenticate = () => dispatch => {
+/* export const authenticate = () => dispatch => {
   dispatch({type: AUTH_SUCCESS})
-}
+} */
+
+export const authenticate = makeActionCreator(AUTH_SUCCESS);
 
 // admin
 export const adminDataSubmit = values => dispatch => {
@@ -35,9 +39,8 @@ export const adminDataSubmit = values => dispatch => {
     .then(res => {
       if (res.data.error) {
         return dispatch({ type: ADMIN_SUBMIT_FAILED, payload: res.data.error });
-      } 
-        dispatch({ type: ADMIN_SUBMIT_SUCCESS, payload: res.data.success });
-      
+      }
+      dispatch({ type: ADMIN_SUBMIT_SUCCESS, payload: res.data.success });
     })
     .catch(error => {
       if (error) {
@@ -105,6 +108,13 @@ export const deleteItem = item => dispatch => {
     });
 };
 
-// Search Items Service 
+// Search Items Service
 
+const postServiceData = values => {
+  return axios.post("api/service", values);
+};
 
+export const serviceSubmit = makeThunkAsyncActionCreator(
+  "SERVICE_SUBMIT",
+  postServiceData
+);

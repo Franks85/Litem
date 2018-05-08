@@ -3,13 +3,27 @@ const {Schema} = mongoose;
 
 const dataEntrySchema = new Schema({
     _user: { type: Schema.Types.ObjectId, ref: "User" },
-    adviceDate: Date,
+    adviceDate: {
+        type: Date,
+        required: true
+    },
     refCode: {
         type: Number,
-        unique: true
+        unique: true,
+        required: true,
+        trim: true,
+        min: 5,
+        max: 5
     },
-    description: String,
-    pubDate: Date
+    description: {
+        type: String,
+        required: true,
+        lowercase: true
+    },
+    pubDate: {
+        type: Date,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('dataEntry', dataEntrySchema);
