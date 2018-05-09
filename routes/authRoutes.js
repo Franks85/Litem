@@ -38,7 +38,6 @@ module.exports = function(app, passport) {
 
   app.get('/api/profile', (req, res) => {
     res.json(req.user);
-
   })
 
   app.get("/api/logout", function(req, res) {
