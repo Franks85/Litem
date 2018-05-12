@@ -1,5 +1,5 @@
 import axios from "axios";
-import { makeActionCreator, makeAsyncActionCreator } from "redux-toolbelt";
+import { makeActionCreator } from "redux-toolbelt";
 import { makeThunkAsyncActionCreator } from "redux-toolbelt-thunk";
 import {
   FETCH_USER,

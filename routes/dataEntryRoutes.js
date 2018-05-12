@@ -3,10 +3,12 @@ const DataModel = mongoose.model("dataEntry");
 
 module.exports = function(app) {
   app.post("/api/dashboard", async (req, res) => {
-    const { adviceDate, refCode, description, pubDate } = req.body;
+    const { adviceDate, refCode, description, pubDate, itemSelected } = req.body;
+
     const newItem = await new DataModel({
       _user: req.user,
       adviceDate,
+      itemSelected,
       refCode,
       description,
       pubDate
@@ -55,20 +57,19 @@ module.exports = function(app) {
       }
     } catch (error) {
       if (error) {
-        res.send({ error: "Ops something goes wrong :(" });
+        res.send({ error: "Ops something went wrong :(" });
       }
     }
   });
 
   app.post("/api/dashboard/detail/delete", async (req, res) => {
     const { refCode } = req.body;
-    console.log(refCode);
     try {
       const item = await DataModel.findOneAndRemove({ refCode });
       res.send(item);
     } catch (error) {
       if (error) {
-        res.send({ error: "Ops something goes wrong :( try later" });
+        res.send({ error: "Ops something went wrong :( try later" });
       }
     }
   });

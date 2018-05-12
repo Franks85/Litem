@@ -3,9 +3,13 @@ const {Schema} = mongoose;
 
 const dataEntrySchema = new Schema({
     _user: { type: Schema.Types.ObjectId, ref: "User" },
+    itemSelected: {
+        type: String,
+        required: true
+    },
     adviceDate: {
         type: Date,
-        required: true
+        default: Date.now()
     },
     refCode: {
         type: Number,
@@ -17,12 +21,10 @@ const dataEntrySchema = new Schema({
     },
     description: {
         type: String,
-        required: true,
         lowercase: true
     },
     pubDate: {
-        type: Date,
-        required: true
+        type: Date
     }
 });
 

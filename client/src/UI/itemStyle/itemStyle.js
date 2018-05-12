@@ -17,3 +17,9 @@ export const SpanField = styled.span`
   color: rgba(0, 0, 0, 0.87);
   margin-left: 5px;
 `;
+
+export const SubTitle = styled.p`
+  color: palevioletred;
+  text-transform: uppercase;
+  font-size: 20px;
+`;
