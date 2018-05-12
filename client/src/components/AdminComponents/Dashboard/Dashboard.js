@@ -7,7 +7,8 @@ import SearchBar from "../../../UI/SearchBar/searchBar";
 import {
   ItemField,
   SpanField,
-  ItemContainer
+  ItemContainer,
+  SubTitle
 } from "../../../UI/itemStyle/itemStyle";
 import { Row, Col, Preloader } from "react-materialize";
 
@@ -52,14 +53,18 @@ class Dashboard extends Component {
         return (
           <div key={item._id}>
             <ItemContainer>
-              <h5>
+              <SubTitle>
                 ITEM REF: <SpanField>{item.refCode}</SpanField>
-              </h5>
+              </SubTitle>
               <ItemField className="right">
                 Saved On:
                 <SpanField>
                   {new Date(item.adviceDate).toLocaleDateString()}
                 </SpanField>
+              </ItemField>
+              <ItemField>
+                Item Type:
+                <SpanField>{item.itemSelected}</SpanField>
               </ItemField>
               <ItemField>
                 Description:
@@ -78,9 +83,7 @@ class Dashboard extends Component {
       })
     );
 
- 
-
-    const fullItemsList = (!this.props.items.error)
+    const fullItemsList = !this.props.items.error
       ? this.props.items.sort(function(a, b) {
           return new Date(b.adviceDate) - new Date(a.adviceDate);
         })
@@ -107,13 +110,16 @@ class Dashboard extends Component {
     return (
       <div className="container">
         <h4 style={{ marginTop: 40 }}>Welcome to your admin dashboard! </h4>
-        <p>Click on the red button to start inserting your data. </p>
+        <SubTitle>
+          Click on the red button to start inserting your data.{" "}
+        </SubTitle>
         {this.props.deleteMsg ? deleteMsg : null}
-        <h5>Search Item by RefCode:</h5>
-        <div className="row">
-          <div className="col s12">{searchBar}</div>
+
+        <div className="row" style={{ padding: "40px 0px" }}>
+          <h5>Search Item by RefCode:</h5>
+          <div className="col-m12 col-s6">{searchBar}</div>
         </div>
-        <h5>Items List</h5>
+        <SubTitle>Admin Saved List</SubTitle>
         <div className="row">
           <div className="col-s12">{perPageList}</div>
         </div>
