@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { deleteItem } from "../../../../actions";
-import { Link } from "react-router-dom";
-import { Button, Modal, Icon } from "react-materialize";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { deleteItem } from '../../../../actions'
+import { Link } from 'react-router-dom'
+import { Button, Modal, Icon } from 'react-materialize'
 import { ItemContainer, ItemField, SpanField} from '../../../../UI/itemStyle/itemStyle'
 
 class ItemDetail extends Component {
   deleteAction = () => {
-    this.props.deleteItem(this.props.item);
+    this.props.deleteItem(this.props.item)
   };
 
   componentWillUpdate(nextProps) {
     if (nextProps.deleteSuccess !== this.props.deleteSuccess) {
-      this.props.history.push("/dashboard");
+      this.props.history.push('/dashboard')
     }
   }
 
   render() {
-    let content;
+    let content
     if (this.props.item.length) {
       content = this.props.item.map(item => {
         return (
@@ -68,20 +68,20 @@ class ItemDetail extends Component {
               </SpanField>
             </ItemField>
             <ItemField>
-              Saved On:{" "}
+              Saved On:{' '}
               <SpanField>
                 {new Date(item.adviceDate).toLocaleDateString()}
               </SpanField>
             </ItemField>
           </ItemContainer>
-        );
-      });
+        )
+      })
     } else {
       content = (
         <div>
           <div
             className="alert alert-danger fade show"
-            style={{ paddingTop: "40" }}
+            style={{ paddingTop: '40' }}
           >
             {this.props.errMsg}
           </div>
@@ -89,10 +89,10 @@ class ItemDetail extends Component {
             <Link to="/dashboard">Back to Dashboard</Link>
           </h5>
         </div>
-      );
+      )
     }
 
-    return <div>{content}</div>;
+    return <div>{content}</div>
   }
 }
 
@@ -101,7 +101,7 @@ const mapStateToProps = state => {
     item: state.admin.itemDetail,
     errMsg: state.admin.searchFailMsg,
     deleteSuccess: state.admin.deleteSuccessMsg
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, { deleteItem })(ItemDetail);
+export default connect(mapStateToProps, { deleteItem })(ItemDetail)

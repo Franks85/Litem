@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 class Header extends Component {
   renderContent() {
     switch (this.props.auth) {
       case null:
-        return;
+        return
       case false:
         return [
           <li key="1">
@@ -18,7 +18,7 @@ class Header extends Component {
           <li key="3">
             <NavLink to="/service">Search Service</NavLink>
           </li>
-        ];
+        ]
       default:
         return [
           <li key="1">
@@ -30,7 +30,7 @@ class Header extends Component {
           <li key="3">
             <a href="/api/logout">Logout</a>
           </li>
-        ];
+        ]
     }
   }
 
@@ -42,25 +42,25 @@ class Header extends Component {
             LITEM
           </a>
           <ul className="right hide-on-med-and-down">
-          {this.renderContent()}
+            {this.renderContent()}
           </ul>
 
           <ul id="nav-mobile" className="sidenav">
-          {this.renderContent()}
+            {this.renderContent()}
           </ul>
           <a href="#mobile" data-target="nav-mobile" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </a>
         </div>
       </nav>
-    );
+    )
   }
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth.authenticated };
+  return { auth: state.auth.authenticated }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(Header)
 
   

@@ -1,17 +1,17 @@
-const assert = require("assert");
-const request = require("supertest");
-const app = require("../index");
+const assert = require('assert')
+const request = require('supertest')
+const app = require('../index')
 
-describe("Express app", () => {
+describe('Express app', () => {
  
-  it("GET request to /", (done) => {
+  it('GET request to /', (done) => {
     request(app)
-      .get("/")
+      .get('/')
       .end((err, response) => {
         assert(response.body.hi === 'there')
         done()
-      });
+      })
 
-  });
+  })
   
-});
+})

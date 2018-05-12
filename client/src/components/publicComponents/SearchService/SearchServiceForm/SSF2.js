@@ -1,14 +1,14 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { Col, Row } from "react-materialize";
-import { inputField } from "../../../../utils/form/inputsField";
-import "react-widgets/dist/css/react-widgets.css";
-import { color } from "./selectColorsList";
-import { renderDropdownList } from "../../../../utils/form/dropdownList";
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import { Col, Row } from 'react-materialize'
+import { inputField } from '../../../../utils/form/inputsField'
+import 'react-widgets/dist/css/react-widgets.css'
+import { color } from './selectColorsList'
+import { renderDropdownList } from '../../../../utils/form/dropdownList'
 import validate from './validate'
 
 const SSF2 = props => {
-  const { handleSubmit, previousPage } = props;
+  const { handleSubmit, previousPage } = props
   return (
     <div>
       <Row>
@@ -44,9 +44,9 @@ const SSF2 = props => {
               component="textarea"
               placeholder="Insert a full description.."
               style={{
-                marginBottom: "30px",
-                paddingTop: "8px",
-                height: "150px"
+                marginBottom: '30px',
+                paddingTop: '8px',
+                height: '150px'
               }}
             />
             <button
@@ -64,12 +64,12 @@ const SSF2 = props => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
 export default reduxForm({
-  form: "searchService", // <------ same form name
+  form: 'searchService', // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   validate
-})(SSF2);
+})(SSF2)
