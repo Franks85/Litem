@@ -4,9 +4,8 @@ const DataModel = mongoose.model("dataEntry");
 module.exports = function(app) {
   app.post("/api/dashboard", async (req, res) => {
     const { adviceDate, refCode, description, pubDate } = req.body;
-
     const newItem = await new DataModel({
-      _user: req.user.id,
+      _user: req.user,
       adviceDate,
       refCode,
       description,
@@ -20,7 +19,10 @@ module.exports = function(app) {
       e => {
         if(e.code === 11000) {
           res.send({error: 'Please insert a new valid REF CODE'})
-        } 
+        }
+        else {
+          res.send(e)
+        }
       }
     );
   });
