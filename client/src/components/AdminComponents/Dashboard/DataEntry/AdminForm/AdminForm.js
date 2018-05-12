@@ -78,7 +78,7 @@ function validate(values) {
 
   if (isNaN(Number(values.refCode))) {
     errors.refCode = "RefCode must be a number";
-  } else if(values.refCode.lenght !== 5) {
+  } else if (values.refCode.length !== 5) {
     errors.refCode = 'RefCode is a five-digit number'
   }
 
