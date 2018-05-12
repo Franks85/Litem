@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js",
+    "server": "concurrently --success 'last' \"nodemon index.js\" \"node scripts/mongo-local-start\"",
     "test": "NODE_ENV=test nodemon --exec 'mocha --recursive -R min' ",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -35,11 +35,14 @@
     "mongoose": "^4.13.9",
     "mongoose-error-handler": "^1.0.0",
     "morgan": "^1.9.0",
-    "nodemon": "^1.14.11",
+    "nodemon": "^1.17.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path-parser": "^3.0.1",
     "sendgrid": "^5.2.3",
     "supertest": "^3.0.0"
+  },
+  "devDependencies": {
+    "mongo-in-memory": "^0.0.5"
   }
 }

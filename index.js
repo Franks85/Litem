@@ -16,11 +16,9 @@ require("./services/passport")(passport);
 
 mongoose.Promise = global.Promise;
 
-if (!keys.mongoURI === 'fake') {
-  mongoose.connect(keys.mongoURI, {
-    useMongoClient: true
-  });
-} 
+mongoose.connect(keys.mongoURI, {
+  useMongoClient: true
+});
 
 const app = express();
 
