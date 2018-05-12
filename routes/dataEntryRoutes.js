@@ -20,7 +20,7 @@ module.exports = function(app) {
       },
       e => {
         if(e.code === 11000) {
-          res.send({error: 'Please insert a new valid REF CODE'})
+          res.send({ error: 'RefCode already taken, please insert a new one' })
         }
         else {
           res.send(e)
