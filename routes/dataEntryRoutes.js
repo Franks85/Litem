@@ -6,7 +6,7 @@ module.exports = function(app) {
     const { adviceDate, refCode, description, pubDate, itemSelected } = req.body;
 
     const newItem = await new DataModel({
-      _user: req.user.id,
+      _user: req.user,
       adviceDate,
       itemSelected,
       refCode,
@@ -20,8 +20,11 @@ module.exports = function(app) {
       },
       e => {
         if(e.code === 11000) {
-          res.send({error: 'RefCode already taken, please insert a new one'})
-        } 
+          res.send({ error: 'RefCode already taken, please insert a new one' })
+        }
+        else {
+          res.send(e)
+        }
       }
     );
   });

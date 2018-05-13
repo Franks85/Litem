@@ -15,7 +15,9 @@ const dataEntrySchema = new Schema({
         type: Number,
         unique: true,
         required: true,
-        trim: true
+        trim: true,
+        min: 10000,
+        max: 99999
     },
     description: {
         type: String,
