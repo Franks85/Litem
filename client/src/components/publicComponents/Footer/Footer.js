@@ -1,5 +1,5 @@
-import React from "react";
-import { Footer } from "react-materialize";
+import React from 'react'
+import { Footer } from 'react-materialize'
 
 const FooterApp = () => {
   return (
@@ -43,7 +43,7 @@ const FooterApp = () => {
         </p>
       </Footer>;
     </div>
-  );
-};
+  )
+}
 
-export default FooterApp;
+export default FooterApp

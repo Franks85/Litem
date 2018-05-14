@@ -1,0 +1,41 @@
+{
+    "plugins": [
+        "react"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "rules": {
+        "no-console": 0,
+        "quotes": [
+            2,
+            "single"
+        ],
+        "eol-last": [ 2, "always" ],
+        "react/prop-types": 0,
+        "no-debugger": 0,
+        "react/no-did-update-set-state": 0,
+        "semi": [
+            "error",
+            "never"
+        ],
+        "no-tabs": 2,
+        "comma-dangle": [
+            "error"
+        ],
+        "indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ]
+    },
+    "env": {
+        "node": true,
+        "mocha": true,
+        "browser": true
+    },
+    "parser": "babel-eslint"
+}

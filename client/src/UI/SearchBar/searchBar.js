@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const searchBar = props => {
   return (
@@ -13,7 +13,7 @@ const searchBar = props => {
         Search
       </a>
     </div>
-  );
-};
+  )
+}
 
-export default searchBar;
+export default searchBar

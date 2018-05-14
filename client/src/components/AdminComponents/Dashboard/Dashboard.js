@@ -1,44 +1,44 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchItems, searchItem } from "../../../actions/index";
-import Pagination from "../../../UI/pagination/pagination";
-import SearchBar from "../../../UI/SearchBar/searchBar";
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchItems, searchItem } from '../../../actions/index'
+import Pagination from '../../../UI/pagination/pagination'
+import SearchBar from '../../../UI/SearchBar/searchBar'
 import {
   ItemField,
   SpanField,
   ItemContainer,
   SubTitle
-} from "../../../UI/itemStyle/itemStyle";
-import { Row, Col, Preloader } from "react-materialize";
+} from '../../../UI/itemStyle/itemStyle'
+import { Row, Col, Preloader } from 'react-materialize'
 
 class Dashboard extends Component {
   state = {
     pageOfItems: [],
-    searchValue: ""
+    searchValue: ''
   };
 
   componentDidMount() {
-    this.props.fetchItems();
+    this.props.fetchItems()
   }
 
   componentDidUpdate(nextProps) {
     if (nextProps.itemDetail !== this.props.itemDetail) {
-      this.props.history.push("/dashboard/detail");
+      this.props.history.push('/dashboard/detail')
     }
   }
 
   onChangePage = pageOfItems => {
     // update state with new page of items
-    this.setState({ pageOfItems: pageOfItems });
+    this.setState({ pageOfItems: pageOfItems })
   };
 
   handleSearchChange = e => {
-    this.setState({ searchValue: e.target.value });
+    this.setState({ searchValue: e.target.value })
   };
 
   handleSearchClick = () => {
-    this.props.searchItem(this.state.searchValue);
+    this.props.searchItem(this.state.searchValue)
   };
 
   render() {
@@ -77,17 +77,17 @@ class Dashboard extends Component {
                 </SpanField>
               </ItemField>
             </ItemContainer>
-            <div style={{ padding: "12px 0px" }} />
+            <div style={{ padding: '12px 0px' }} />
           </div>
-        );
+        )
       })
-    );
+    )
 
     const fullItemsList = !this.props.items.error
       ? this.props.items.sort(function(a, b) {
-          return new Date(b.adviceDate) - new Date(a.adviceDate);
-        })
-      : null;
+        return new Date(b.adviceDate) - new Date(a.adviceDate)
+      })
+      : null
 
     const deleteMsg = (
       <div className="row">
@@ -97,7 +97,7 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>
-    );
+    )
 
     const searchBar = this.props.items ? (
       <SearchBar
@@ -105,17 +105,17 @@ class Dashboard extends Component {
         onClick={this.handleSearchClick}
         value={this.state.searchValue}
       />
-    ) : null;
+    ) : null
 
     return (
       <div className="container">
         <h4 style={{ marginTop: 40 }}>Welcome to your admin dashboard! </h4>
         <SubTitle>
-          Click on the red button to start inserting your data.{" "}
+          Click on the red button to start inserting your data.{' '}
         </SubTitle>
         {this.props.deleteMsg ? deleteMsg : null}
 
-        <div className="row" style={{ padding: "40px 0px" }}>
+        <div className="row" style={{ padding: '40px 0px' }}>
           <h5>Search Item by RefCode:</h5>
           <div className="col-m12 col-s6">{searchBar}</div>
         </div>
@@ -140,7 +140,7 @@ class Dashboard extends Component {
           </Link>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -150,7 +150,7 @@ const mapStateToProps = state => {
     itemDetail: state.admin.itemDetail,
     deleteMsg: state.admin.deleteSuccessMsg,
     loading: state.admin.loading
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, { fetchItems, searchItem })(Dashboard);
+export default connect(mapStateToProps, { fetchItems, searchItem })(Dashboard)

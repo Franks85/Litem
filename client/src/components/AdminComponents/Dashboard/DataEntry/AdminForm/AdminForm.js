@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import _ from "lodash";
-import { inputField } from "../../../../../utils/form/inputsField";
-import formFields from "./formFields";
-import "../../../../../UI/css/alert.css";
-import { renderDropdownList } from "../../../../../utils/form/dropdownList";
-import items from "../../../../publicComponents/SearchService/SearchServiceForm/selectItemsList";
+import React, { Component } from 'react'
+import { reduxForm, Field } from 'redux-form'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import _ from 'lodash'
+import { inputField } from '../../../../../utils/form/inputsField'
+import formFields from './formFields'
+import '../../../../../UI/css/alert.css'
+import { renderDropdownList } from '../../../../../utils/form/dropdownList'
+import items from '../../../../publicComponents/SearchService/SearchServiceForm/selectItemsList'
 
 class AdminDataEntry extends Component {
   renderField() {
@@ -20,12 +20,12 @@ class AdminDataEntry extends Component {
           name={name}
           component={inputField}
         />
-      );
-    });
+      )
+    })
   }
 
-  submit = values => {
-    this.props.onFormSubmit();
+  submit = () => {
+    this.props.onFormSubmit()
   };
 
   render() {
@@ -37,15 +37,15 @@ class AdminDataEntry extends Component {
           </div>
         </div>
       </div>
-    );
-    const { error, handleSubmit, submitting } = this.props;
+    )
+    const { error, handleSubmit, submitting } = this.props
 
     return (
       <div className="center-align">
         <div className="row" style={{ marginBottom: 50 }}>
           <h2
             className="center-align pink-text"
-            style={{ display: "inline-flex", verticalAlign: "middle" }}
+            style={{ display: 'inline-flex', verticalAlign: 'middle' }}
           >
             <i className="material-icons medium">account_circle</i>Admin Data
             Entry
@@ -82,42 +82,42 @@ class AdminDataEntry extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 function validate(values) {
-  const errors = {};
+  const errors = {}
 
   if (isNaN(Number(values.refCode))) {
-    errors.refCode = "RefCode must be a number";
+    errors.refCode = 'RefCode must be a number'
   } else if (values.refCode.length !== 5) {
-    errors.refCode = "RefCode is a five-digit number";
+    errors.refCode = 'RefCode is a five-digit number'
   }
 
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
-      errors[name] = "You must provide a value";
+      errors[name] = 'You must provide a value'
     }
-  });
+  })
 
   if(!values.itemSelected) {
     errors.itemSelected = 'Required'
   }
 
-  return errors;
+  return errors
 }
 
 const mapStateToProps = state => {
   return {
     clientMsg: state.admin.clientMsg
-  };
-};
+  }
+}
 
-const admin = connect(mapStateToProps)(AdminDataEntry);
+const admin = connect(mapStateToProps)(AdminDataEntry)
 
 export default reduxForm({
   validate,
   destroyOnUnmount: false,
-  form: "dataEntry"
-})(admin);
+  form: 'dataEntry'
+})(admin)

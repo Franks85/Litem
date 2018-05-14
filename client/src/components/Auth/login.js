@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { reduxForm, Field, SubmissionError } from "redux-form";
-import { inputField } from "../../utils/form/inputsField";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
-import Spinner from '../../UI/spinner/spinner';
+import React, { Component } from 'react'
+import { reduxForm, Field, SubmissionError } from 'redux-form'
+import { inputField } from '../../utils/form/inputsField'
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+import Spinner from '../../UI/spinner/spinner'
+import Promise from 'bluebird'
 
 class Login extends Component {
   state = {
@@ -26,28 +27,28 @@ class Login extends Component {
           component={inputField}
         />
       </div>
-    );
+    )
   }
 
   submit = values => {
-    let self = this;
+    let self = this
     return new Promise((resolve, reject) => {
-      axios.post("/api/login", values).then(function(response) {
+      axios.post('/api/login', values).then(function(response) {
         if (response.data.message) {
-          const errObj = new SubmissionError({ _error: response.data.message });
-          reject(errObj);
+          const errObj = new SubmissionError({ _error: response.data.message })
+          reject(errObj)
         } else {
-          self.setState({ redirectToDashboard: true });
+          self.setState({ redirectToDashboard: true })
         }
-      });
-    });
+      })
+    })
   };
 
   render() {
     if (this.state.redirectToDashboard) {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to="/dashboard" />
     }
-    const { error, handleSubmit, submitting } = this.props;
+    const { error, handleSubmit, submitting } = this.props
     const spinner = submitting ? <Spinner /> : null
     return (
      
@@ -55,7 +56,7 @@ class Login extends Component {
     
         <h2
           className="pink-text"
-          style={{ display: "inline-flex", verticalAlign: "middle" }}
+          style={{ display: 'inline-flex', verticalAlign: 'middle' }}
         >
           <i className="material-icons medium">account_circle</i>LOGIN
         </h2>
@@ -80,28 +81,28 @@ class Login extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 function validate(values) {
-  const errors = {};
+  const errors = {}
 
   if (!values.email) {
-    errors.email = "You must provide an email address";
+    errors.email = 'You must provide an email address'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+    errors.email = 'Invalid email address'
   }
 
   if (!values.password) {
-    errors.password = "You must provide a password";
+    errors.password = 'You must provide a password'
   } else if (values.password.length < 8) {
-    errors.password = "Password must be at least 8 characters";
+    errors.password = 'Password must be at least 8 characters'
   }
-  return errors;
+  return errors
 }
 
 export default reduxForm({
   validate,
-  form: "authLoginForm"
-})(Login);
+  form: 'authLoginForm'
+})(Login)

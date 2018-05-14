@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import AdminForm from "./AdminForm/AdminForm";
-import AdminFormReview from "./AdminForm/adminFormReview";
-import { reduxForm } from "redux-form";
+import React, { Component } from 'react'
+import AdminForm from './AdminForm/AdminForm'
+import AdminFormReview from './AdminForm/adminFormReview'
+import { reduxForm } from 'redux-form'
 
 class DataEntry extends Component {
   state = {
@@ -21,11 +21,11 @@ class DataEntry extends Component {
           />
         )}
       </div>
-    );
+    )
   }
 }
 
 
 export default reduxForm({
-  form: "dataEntry"
-})(DataEntry);
+  form: 'dataEntry'
+})(DataEntry)

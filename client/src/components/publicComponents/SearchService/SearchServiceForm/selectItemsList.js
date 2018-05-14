@@ -28,15 +28,15 @@ const rowItems = [
 ];
 
 const capitalize = rowItems => {
-  let newItemArray = [];
+  let newItemArray = []
   for(var i = 1 ; i < rowItems.length ; i++){
-    newItemArray[i] = rowItems[i].charAt(0).toUpperCase() + rowItems[i].substr(1);
+    newItemArray[i] = rowItems[i].charAt(0).toUpperCase() + rowItems[i].substr(1)
+  }
+  return newItemArray
 }
-  return newItemArray;
-};
 
-const sortItem = rowItems.sort();
+const sortItem = rowItems.sort()
 
-const items = capitalize(sortItem);
+const items = capitalize(sortItem)
 
-export default items;
+export default items
