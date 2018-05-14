@@ -1,8 +1,8 @@
-import * as actionType from "../actions/types";
+import * as actionType from '../actions/types'
 
 const initialstate = {
   loading: false,
-  clientMsg: "",
+  clientMsg: '',
   itemSaved: false,
   fail: true,
   items: [],
@@ -11,7 +11,7 @@ const initialstate = {
   searchFailMsg: '',
   deleteSuccessMsg: '',
   deleteFailMsg: ''
-};
+}
 
 export default function(state = initialstate, action) {
   switch (action.type) {
@@ -23,17 +23,17 @@ export default function(state = initialstate, action) {
     case actionType.ADMIN_SUBMIT_SUCCESS:
       return {
         ...state,
-        clientMsg: action.payload || "",
+        clientMsg: action.payload || '',
         itemSaved: true,
         fail: false
-      };
+      }
     case actionType.ADMIN_SUBMIT_FAILED:
       return {
         ...state,
-        clientMsg: action.payload || "",
+        clientMsg: action.payload || '',
         itemSaved: false,
         fail: true
-      };
+      }
     case actionType.ADMIN_FETCH_ITEM:
       return {
         ...state,
@@ -42,17 +42,17 @@ export default function(state = initialstate, action) {
         
       }
     case actionType.ITEMS_FETCH_FAIL:
-     return {
+      return {
         ...state,
         items: null,
         fetchError: action.error
 
-     }
+      }
     case actionType.ITEMS_FETCH_SUCCESS:
-     return {
-       ...state,
-       loading: false
-     }
+      return {
+        ...state,
+        loading: false
+      }
     case actionType.ADMIN_ITEM_SEARCH:
       return {
         ...state,
@@ -60,14 +60,14 @@ export default function(state = initialstate, action) {
         searchFailMsg: action.meta
       }
     case actionType.ADMIN_ITEM_DELETE:
-     return {
-      ...state,
-      deleteSuccessMsg: action.success,
-      deleteFailMsg: action.error,
-      items: state.items.filter(item => item !== action.payload)
-     }
+      return {
+        ...state,
+        deleteSuccessMsg: action.success,
+        deleteFailMsg: action.error,
+        items: state.items.filter(item => item !== action.payload)
+      }
     default: 
-      return state;
+      return state
   }
 
 }

@@ -1,14 +1,14 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { Col, Row } from "react-materialize";
-import { inputField } from "../../../../utils/form/inputsField";
-import { renderDropdownList } from "../../../../utils/form/dropdownList";
-import "react-widgets/dist/css/react-widgets.css";
-import validate from "./validate";
-import items from "./selectItemsList";
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import { Col, Row } from 'react-materialize'
+import { inputField } from '../../../../utils/form/inputsField'
+import { renderDropdownList } from '../../../../utils/form/dropdownList'
+import 'react-widgets/dist/css/react-widgets.css'
+import validate from './validate'
+import items from './selectItemsList'
 
 const SSF1 = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit } = props
   return (
     <div>
       <Row>
@@ -42,12 +42,12 @@ const SSF1 = props => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
 export default reduxForm({
-  form: "searchService", // <------ same form name
+  form: 'searchService', // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   validate
-})(SSF1);
+})(SSF1)

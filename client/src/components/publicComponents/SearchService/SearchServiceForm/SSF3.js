@@ -1,26 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Field, reduxForm, SubmissionError } from "redux-form";
-import { Col, Row, Preloader } from "react-materialize";
-import { inputField } from "../../../../utils/form/inputsField";
-import formFields from "./SSF3formFields";
-import _ from "lodash";
-import validate from "./validate";
-import { serviceSubmit } from "../../../../actions";
-import { Redirect, withRouter, Link } from "react-router-dom";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
+import { Col, Row, Preloader } from 'react-materialize'
+import { inputField } from '../../../../utils/form/inputsField'
+import formFields from './SSF3formFields'
+import _ from 'lodash'
+import validate from './validate'
+import { serviceSubmit } from '../../../../actions'
+import { Redirect, withRouter, Link } from 'react-router-dom'
 
 class SSF3 extends Component {
   state = {
-    successMsg: ""
+    successMsg: ''
   };
   submit = values => {
     return this.props.serviceSubmit(values).then(res => {
       if (res.data.error) {
-        throw new SubmissionError({ _error: res.data.error });
+        throw new SubmissionError({ _error: res.data.error })
       } else if (res.data.success) {
-        this.setState({ successMsg: res.data.success });
+        this.setState({ successMsg: res.data.success })
       }
-    });
+    })
   };
 
   renderField() {
@@ -33,13 +33,13 @@ class SSF3 extends Component {
           name={name}
           component={inputField}
         />
-      );
-    });
+      )
+    })
   }
 
   render() {
     if (this.state.redirectToSuccessPage) {
-      return <Redirect to="/" />;
+      return <Redirect to="/" />
     }
     const {
       handleSubmit,
@@ -47,7 +47,7 @@ class SSF3 extends Component {
       previousPage,
       submitting,
       error
-    } = this.props;
+    } = this.props
 
     const spinner = this.props.loading ? (
       <Row>
@@ -55,10 +55,10 @@ class SSF3 extends Component {
           <Preloader flashing />
         </Col>
       </Row>
-    ) : null;
+    ) : null
 
     const successMsg = (
-      <div style={{ marginTop: "30px" }}>
+      <div style={{ marginTop: '30px' }}>
         <div className="row center">
           <div className="col s12">
             <div className="alert alert-success fade show">
@@ -70,7 +70,7 @@ class SSF3 extends Component {
           </div>
         </div>
       </div>
-    );
+    )
 
     return (
       <div>
@@ -99,7 +99,7 @@ class SSF3 extends Component {
             </form>
             {this.state.successMsg ? successMsg : null}
 
-            <div style={{ marginTop: "30px" }}>
+            <div style={{ marginTop: '30px' }}>
               {error && (
                 <div className="row center">
                   <div className="col s12">
@@ -113,21 +113,21 @@ class SSF3 extends Component {
           </Col>
         </Row>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
     loading: state.service.loading
-  };
-};
+  }
+}
 
-const ssf3 = connect(mapStateToProps, { serviceSubmit })(withRouter(SSF3));
+const ssf3 = connect(mapStateToProps, { serviceSubmit })(withRouter(SSF3))
 
 export default reduxForm({
-  form: "searchService", // <------ same form name
+  form: 'searchService', // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   validate
-})(ssf3);
+})(ssf3)

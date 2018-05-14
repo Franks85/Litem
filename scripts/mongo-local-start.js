@@ -1,12 +1,12 @@
 const MongoInMemory = require('mongo-in-memory')
 const User = require('../models/User')
 const mongoose = require('mongoose')
-const keys = require("../config/keys");
+const keys = require('../config/keys')
 
 const port = 27017
 const mongoServerInstance = new MongoInMemory(port)
 
-mongoServerInstance.start((error, config) => {
+mongoServerInstance.start((error) => {
   if (error) {
     console.error(error)
   } else {
@@ -18,7 +18,7 @@ mongoServerInstance.start((error, config) => {
 })
 
 async function createTestUser() {
-  mongoose.Promise = global.Promise;
+  mongoose.Promise = global.Promise
 
   await mongoose.connect(keys.mongoURI, {
     useMongoClient: true

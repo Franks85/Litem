@@ -1,8 +1,8 @@
 module.exports = function(app, passport) {
   // test route
-  app.get("/api", function(req, res) {
-    res.send({ hi: "there" });
-  });
+  app.get('/api', function(req, res) {
+    res.send({ hi: 'there' })
+  })
 
   // auth route
   
@@ -14,11 +14,11 @@ module.exports = function(app, passport) {
         return res.send({message: info.message})
       }
       req.logIn(user, function(err) {
-        if (err) { return next(err); }
-        return res.redirect('/api/profile');
-      });
-    })(req, res, next);
-  });
+        if (err) { return next(err) }
+        return res.redirect('/api/profile')
+      })
+    })(req, res, next)
+  })
 
   app.post('/api/register', function(req, res, next) {
     passport.authenticate('register', function(err, user, info) {
@@ -28,22 +28,22 @@ module.exports = function(app, passport) {
         return res.send({message: info.message})
       }
       req.logIn(user, function(err) {
-        if (err) { return next(err); }
-        return res.redirect('/api/profile');
-      });
-    })(req, res, next);
-  });
+        if (err) { return next(err) }
+        return res.redirect('/api/profile')
+      })
+    })(req, res, next)
+  })
 
   // testing auth flow
 
   app.get('/api/profile', (req, res) => {
-    res.json(req.user);
+    res.json(req.user)
   })
 
-  app.get("/api/logout", function(req, res) {
-    req.logout();
-    req.session = null;
-    res.redirect("/");
-  });
-};
+  app.get('/api/logout', function(req, res) {
+    req.logout()
+    req.session = null
+    res.redirect('/')
+  })
+}
 

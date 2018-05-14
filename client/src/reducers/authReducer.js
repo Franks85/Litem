@@ -1,10 +1,10 @@
-import * as actionType from "../actions/types";
+import * as actionType from '../actions/types'
 
 const initialstate = {
   user: false,
   loading: false,
   authenticated: false
-};
+}
 
 export default function(state = initialstate, action) {
   switch (action.type) {
@@ -18,13 +18,13 @@ export default function(state = initialstate, action) {
         ...state,
         loading: true
       }
-      case actionType.AUTH_FAIL:
+    case actionType.AUTH_FAIL:
       return {
         ...state,
         loading: false,
         authenticated: false
       }
-      case actionType.AUTH_SUCCESS:
+    case actionType.AUTH_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -32,6 +32,6 @@ export default function(state = initialstate, action) {
       }
 
     default:
-      return state;
+      return state
   }
 }

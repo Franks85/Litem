@@ -1,7 +1,7 @@
-import React from "react";
-import frontImage from "../../../UI/images/lithome.jpg";
-import sectionImage from "../../../UI/images/sky.jpg";
-import styled from "styled-components";
+import React from 'react'
+import frontImage from '../../../UI/images/lithome.jpg'
+import sectionImage from '../../../UI/images/sky.jpg'
+import styled from 'styled-components'
 
 const ActionBox = styled.div`
   position: relative;
@@ -10,7 +10,7 @@ const ActionBox = styled.div`
   padding: 30px;
   opacity: 0.9;
   background-image: url(${frontImage});
-`;
+`
 
 const InterSection = styled.div`
   display: flex;
@@ -21,9 +21,9 @@ const InterSection = styled.div`
   padding: 30px;
   opacity: 0.9;
   background-image: url(${sectionImage});
-`;
+`
 
-const landing = props => {
+const landing = () => {
   return (
     <div>
       <ActionBox>
@@ -127,7 +127,7 @@ const landing = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default landing;
+export default landing
