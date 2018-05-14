@@ -3,7 +3,7 @@ const rowItems = [
   "Bicycles, prams, strollers",
   "sticks, crutches",
   "bags, baby carriers, backpacks",
-  "bracelets, bracelets",
+  "bracelets",
   "footwear",
   "hats, gloves, scarves",
   "music CDs, discs",
