@@ -39,6 +39,7 @@ const landing = () => {
           <a
             href="/service"
             className="btn-large waves-effect waves-light teal lighten-1"
+            data-testid='action-btn'
           >
             Get Started
           </a>
