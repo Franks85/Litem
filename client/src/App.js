@@ -10,6 +10,7 @@ import Header from './components/publicComponents/Header/Header'
 import Footer from './components/publicComponents/Footer/Footer'
 import Landing from './components/publicComponents/Landing/Landing'
 import SearchService from './components/publicComponents/SearchService/SearchService'
+import SearchBar from './components/publicComponents/SearchBar/SearchBar'
 
 // Admin components
 import Login from './components/Auth/login'
@@ -34,6 +35,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/service" component={SearchService} />
+              <Route path="/search" component={SearchBar} />
               <Route
                 path="/dashboard"
                 exact

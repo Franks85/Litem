@@ -16,7 +16,7 @@ class Header extends Component {
             <NavLink to="/login">Login</NavLink>
           </li>,
           <li key="3">
-            <NavLink to="/service">Search Service</NavLink>
+            <NavLink to="/search">Search Service</NavLink>
           </li>
         ]
       default:

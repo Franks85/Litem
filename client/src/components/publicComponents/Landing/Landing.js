@@ -37,7 +37,7 @@ const landing = () => {
         </div>
         <div className="row center">
           <a
-            href="/service"
+            href="/search"
             className="btn-large waves-effect waves-light teal lighten-1"
             data-testid='action-btn'
           >

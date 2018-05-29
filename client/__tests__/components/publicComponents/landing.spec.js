@@ -4,7 +4,8 @@ import { render } from "../../setup/test_setup_utils";
 
 describe("Render Landing Component", () => {
   const { getByText, getByTestId, container } = render(<Landing />);
-  it("+++ action-btn content", () => {
+  it("+++ slide action-btn", () => {
+    expect(getByTestId("action-btn")).toBeInTheDOM();
     expect(getByTestId("action-btn")).toHaveTextContent("Get Started");
   });
 });
