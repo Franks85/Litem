@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, reduxForm, SubmissionError } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { renderDropdownList } from "../../../utils/form/dropdownList";
 import axios from "axios";
 import "react-widgets/dist/css/react-widgets.css";
@@ -41,7 +41,6 @@ class SearchBar extends Component {
 
   render() {
     const { handleSubmit, pristine, submitting } = this.props;
-    console.log(this.state.errorMsg);
     const { itemList, loading, errorMsg } = this.state;
     const results =
       loading && submitting ? (
